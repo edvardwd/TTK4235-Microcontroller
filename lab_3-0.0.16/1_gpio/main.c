@@ -19,15 +19,25 @@ typedef struct {
 
 void button_init(){ 
 	GPIO->PIN_CNF[13] = (3 << 2);
-	// Fill in the configuration for the remaining buttons 
-	GPIO->PIN_CNF[14] = (1 << 2);
+	GPIO->PIN_CNF[14] = (3 << 2);
+}
+
+void triggerLEDMatrix(int on){
+	for(int i = 17; i <= 20; i++){
+		if (on) GPIO->OUTCLR = (1 << i); //matrix is active-low
+		else GPIO->OUTSET = (1 << i);
+	}
+}
+
+int buttonPressed(int button){
+	return !(GPIO->IN & (1 << (button + 12)));
 }
 
 int main(){
 	// Configure LED Matrix
 	for(int i = 17; i <= 20; i++){
 		GPIO->DIRSET = (1 << i);
-		GPIO->OUTCLR = (1 << i);
+		GPIO->OUTSET= (1 << i);
 	}
 
 	// Configure buttons -> see button_init()
@@ -37,10 +47,12 @@ int main(){
 
 		/* Check if button 1 is pressed;
 		 * turn on LED matrix if it is. */
+		if (buttonPressed(1)) triggerLEDMatrix(1);
+		//triggerLEDMatrix(1);
 
 		/* Check if button 2 is pressed;
 		 * turn off LED matrix if it is. */
-
+		if (buttonPressed(2)) triggerLEDMatrix(0);
 		sleep = 10000;
 		while(--sleep); // Delay
 	}
