@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-#define GPIO ((NRF_GPIO_REGS*)__GPIO_BASE_ADDRESS__)
+#define GPIO ((NRF_GPIO_REGS*)0x50000000)
 
 typedef struct {
 	volatile uint32_t RESERVED0[321];
@@ -13,13 +13,14 @@ typedef struct {
 	volatile uint32_t DIRCLR;
 	volatile uint32_t LATCH;
 	volatile uint32_t DETECTMODE;
-	volatile uint32_t RESERVED1[__RESERVED1_SIZE__];
+	volatile uint32_t RESERVED1[118]; //reserved = (0x700 - 0x528) / 4
 	volatile uint32_t PIN_CNF[32];
 } NRF_GPIO_REGS;
 
 void button_init(){ 
-	GPIO->PIN_CNF[__BUTTON_1_PIN__] = (3 << 2);
-	// Fill inn the configuration for the remaining buttons 
+	GPIO->PIN_CNF[13] = (3 << 2);
+	// Fill in the configuration for the remaining buttons 
+	GPIO->PIN_CNF[14] = (1 << 2);
 }
 
 int main(){
@@ -30,7 +31,7 @@ int main(){
 	}
 
 	// Configure buttons -> see button_init()
-
+	button_init();
 	int sleep = 0;
 	while(1){
 
