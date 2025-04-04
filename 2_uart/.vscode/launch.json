@@ -1,0 +1,45 @@
+{
+  "version": "0.3.0",
+  "configurations": [
+    {
+      "name": "Debug nRF52DK (jlink)",
+      "type": "cortex-debug",
+      "request": "launch",
+      "servertype": "jlink",
+      "cwd": "${workspaceRoot}",
+      "executable": "build/main.elf",
+      "device": "nRF52832_xxAA",
+      "svdFile": ".build_system/nrf52.svd",
+      "preLaunchTask": "build",
+      "runToEntryPoint": "main",
+      "interface": "swd",
+      "osx": {
+        "armToolchainPath": "/opt/homebrew/bin/",
+        "gdbPath": "/opt/homebrew/bin/arm-none-eabi-gdb"
+      },
+      "linux": {
+        "armToolchainPath": "/opt/arm-none-eabi-13.2/bin"
+      },
+      "gdbTarget": "localhost:3333"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "cwd": "/home/student/Documents/ttk4235gr23/TTK4235-Microcontroller/lab_3-0.0.16/2_uart",
+      "program": "/home/student/Documents/ttk4235gr23/TTK4235-Microcontroller/lab_3-0.0.16/2_uart/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
