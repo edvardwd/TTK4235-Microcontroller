@@ -36,13 +36,13 @@ int buttonPressed(int button){
 
 void triggerLEDMatrix(int on){
 	for(int i = 17; i <= 20; i++){
-		if (on) GPIO->OUTCLR = (1 << i); //matrix is active-low
+		if (on) GPIO->OUTCLR = (1 << i); // Matrix is active-low
 		else GPIO->OUTSET = (1 << i);
 	}
 }
 
 int main(){
-    int LEDon = 0; //flag to indicate if the LED matrix is on
+    int LEDon = 0; // Flag to indicate if the LED matrix is on
     for(int i = 17; i <= 20; i++){
 		GPIO->DIRSET = (1 << i);
 		GPIO->OUTCLR = (1 << i);
@@ -57,7 +57,7 @@ int main(){
     
 
     while (1){
-        //Send functionality
+        // Send functionality
         if (buttonPressed(1)){
             uart_send('A');
         }
@@ -77,7 +77,7 @@ int main(){
             iprintf("%d * %d = %d\n\r", a, b, a*b);
         }
 
-        //Receive functionality
+        // Receive functionality
         if (uart_read()){
             triggerLEDMatrix(!LEDon);
             LEDon = !LEDon;

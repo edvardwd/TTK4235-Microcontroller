@@ -1,6 +1,5 @@
 #include "gpiote.h"
 
-
 void gpiote_init(){
 	GPIOTE->CONFIG[BTN_1_CH] = ((1 << 0) // Mode: event
 							  | (13 << 8) // Pin select: button 13

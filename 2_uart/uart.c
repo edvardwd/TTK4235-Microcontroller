@@ -48,16 +48,16 @@ typedef struct{
 
 
 void uart_init(){
-    GPIO->PIN_CNF[TXD_PIN] = 1; //TXD output
-    GPIO->PIN_CNF[RXD_PIN] = 0; //RXD input
+    GPIO->PIN_CNF[TXD_PIN] = 1; // TXD output
+    GPIO->PIN_CNF[RXD_PIN] = 0; // RXD input
 
     UART->PSELTXD = TXD_PIN;
     UART->PSELRXD = RXD_PIN;
 
-    UART->BAUDRATE = 0x00275000; //9600 baudrate
+    UART->BAUDRATE = 0x00275000; // 9600 baudrate
 
-    UART->PSELCTS = 0xFFFFFFFF; //CTS disconnected
-    UART->PSELRTS = 0xFFFFFFFF; //RTS discnnected
+    UART->PSELCTS = 0xFFFFFFFF; // CTS disconnected
+    UART->PSELRTS = 0xFFFFFFFF; // RTS discnnected
 
     UART->ENABLE = 4;
     UART->TASKS_STARTRX = 1;
@@ -68,10 +68,10 @@ void uart_send(char letter){
     UART->TASKS_STARTTX = 1;
     UART->TXD = letter;
     
-    while (!UART->EVENTS_TXDRDY); //wait while transmitting
+    while (!UART->EVENTS_TXDRDY); // Wait while transmitting
 
     UART->TASKS_STOPTX = 1;
-    UART->EVENTS_TXDRDY = 0; //clear event
+    UART->EVENTS_TXDRDY = 0; // Clear event
 }
 
 

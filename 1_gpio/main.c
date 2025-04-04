@@ -13,7 +13,7 @@ typedef struct {
 	volatile uint32_t DIRCLR;
 	volatile uint32_t LATCH;
 	volatile uint32_t DETECTMODE;
-	volatile uint32_t RESERVED1[118]; //reserved = (0x700 - 0x528) / 4
+	volatile uint32_t RESERVED1[118]; // Reserved = (0x700 - 0x528) / 4
 	volatile uint32_t PIN_CNF[32];
 } NRF_GPIO_REGS;
 
@@ -24,7 +24,7 @@ void button_init(){
 
 void triggerLEDMatrix(int on){
 	for(int i = 17; i <= 20; i++){
-		if (on) GPIO->OUTCLR = (1 << i); //matrix is active-low
+		if (on) GPIO->OUTCLR = (1 << i); // Matrix is active-low
 		else GPIO->OUTSET = (1 << i);
 	}
 }
