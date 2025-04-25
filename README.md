@@ -4,8 +4,7 @@ Group members:
 - Havan Palo Darbandi
 
 ## Simple C project on a nRF52832 microcontroller
-The project tries to answer the tasks described in main.pdf at this [link](https://github.com/ITK-TTK4235/lab_3/releases/tag/0.0.16).\
-Disclaimer: This project is only tested on the computers at <em>Sanntidssalen</em>.
+The project tries to answer the tasks described in the TTK4235 microcontroller lab description.
 
 ### Contents
 | Folder | Description |
